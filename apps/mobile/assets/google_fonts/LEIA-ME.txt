@@ -1,0 +1,5 @@
+Para o app não depender de internet na primeira abertura, baixe a família "Nunito Sans"
+(licença OFL) em https://fonts.google.com/specimen/Nunito+Sans e copie para esta pasta os
+arquivos estáticos .ttf (ex.: NunitoSans-Regular.ttf, NunitoSans-SemiBold.ttf, NunitoSans-Bold.ttf).
+O pacote google_fonts usa esses arquivos automaticamente. Sem eles, a fonte é baixada uma vez
+e guardada em cache; se não houver conexão, o app usa a fonte do sistema.

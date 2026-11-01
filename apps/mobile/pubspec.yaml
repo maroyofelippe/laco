@@ -1,0 +1,62 @@
+name: laco
+description: "Laço — finanças da família, em harmonia. App Android."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+
+# Faixas de versão em vez de travar uma versão exata: o código usa só APIs estáveis
+# dentro de cada faixa, e o `flutter pub get` escolhe o conjunto compatível mais recente.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Estado e navegação
+  flutter_riverpod: ^2.5.1
+  go_router: ">=14.0.0 <17.0.0"
+
+  # Rede, armazenamento seguro e offline
+  dio: ^5.4.0
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.3.0
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  path_provider: ^2.1.4
+  connectivity_plus: ">=6.0.0 <8.0.0"
+  uuid: ^4.4.0
+
+  # Interface e marca
+  intl: any # fixado pelo flutter_localizations do SDK
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10
+  fl_chart: ">=0.68.0 <2.0.0"
+
+  # Arquivos, nota fiscal e importação
+  file_picker: ">=8.0.0 <11.0.0"
+  image_picker: ^1.1.2
+  google_mlkit_text_recognition: ">=0.13.0 <1.0.0"
+  google_mlkit_barcode_scanning: ">=0.12.0 <1.0.0"
+
+  # Alertas: push (opcional), notificações locais e verificação periódica
+  permission_handler: ">=11.0.0 <13.0.0"
+  flutter_local_notifications: ">=17.2.0 <20.0.0"
+  firebase_core: ">=3.0.0 <5.0.0"
+  firebase_messaging: ">=15.0.0 <17.0.0"
+  workmanager: ">=0.6.0 <1.0.0"
+  app_links: ">=6.0.0 <7.0.0"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ">=4.0.0 <7.0.0"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/brand/
+    # Opcional: coloque aqui os .ttf da Nunito Sans para funcionar 100% offline (ver README)
+    - assets/google_fonts/

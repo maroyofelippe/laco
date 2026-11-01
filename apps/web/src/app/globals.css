@@ -1,0 +1,69 @@
+@import "tailwindcss";
+/* Tokens da marca Laço: fonte única em packages/brand/tokens.json (gerados por build.mjs) */
+@import "../../../../packages/brand/tokens.css";
+
+@theme inline {
+  --color-verde: var(--laco-verde);
+  --color-verde-escuro: var(--laco-verde-escuro);
+  --color-verde-claro: var(--laco-verde-claro);
+  --color-verde-borda: var(--laco-verde-borda);
+  --color-dourado: var(--laco-dourado);
+  --color-dourado-claro: var(--laco-dourado-claro);
+  --color-dourado-texto: var(--laco-dourado-texto);
+  --color-fundo: var(--laco-fundo);
+  --color-superficie: var(--laco-superficie);
+  --color-areia: var(--laco-areia);
+  --color-borda: var(--laco-borda);
+  --color-apoio: var(--laco-apoio);
+  --color-tinta: var(--laco-tinta);
+  --color-receita: var(--laco-receita);
+  --color-despesa: var(--laco-despesa);
+  --color-despesa-claro: var(--laco-despesa-claro);
+  --font-sans: "Nunito Sans Variable", var(--laco-font);
+  --radius-md: var(--laco-radius-md);
+  --radius-lg: var(--laco-radius-lg);
+}
+
+body {
+  @apply bg-fundo font-sans text-tinta antialiased;
+}
+
+::selection {
+  background: var(--laco-dourado-claro);
+}
+
+:focus-visible {
+  outline: 2px solid var(--laco-verde);
+  outline-offset: 2px;
+}
+
+.input {
+  @apply w-full rounded-md border border-borda bg-superficie px-3 py-2 text-sm text-tinta outline-none transition placeholder:text-apoio/70 focus:border-verde focus:ring-2 focus:ring-verde-borda;
+}
+.label {
+  @apply mb-1 block text-xs font-semibold text-apoio;
+}
+.btn {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-md bg-verde px-4 py-2 text-sm font-semibold text-fundo shadow-sm transition hover:bg-verde-escuro disabled:opacity-60;
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-md border border-borda bg-superficie px-3 py-1.5 text-sm font-semibold text-verde transition hover:bg-areia;
+}
+.btn-danger {
+  @apply inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-semibold text-despesa transition hover:bg-despesa-claro;
+}
+.table {
+  @apply w-full text-left text-sm;
+}
+.table th {
+  @apply border-b border-borda px-3 py-2 text-xs font-semibold uppercase tracking-wide text-apoio;
+}
+.table td {
+  @apply border-b border-areia px-3 py-2.5 align-middle;
+}
+.table tbody tr:hover {
+  @apply bg-areia/50;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

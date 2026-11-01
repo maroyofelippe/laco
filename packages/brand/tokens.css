@@ -1,0 +1,36 @@
+/* Gerado por packages/brand/build.mjs a partir de tokens.json — não edite à mão. */
+:root {
+  --laco-verde: #174B43;
+  --laco-verde-escuro: #113A34;
+  --laco-verde-claro: #E6EEEB;
+  --laco-verde-borda: #C9DAD3;
+  --laco-dourado: #E5A94D;
+  --laco-dourado-claro: #FAEBD2;
+  --laco-dourado-texto: #8A5A12;
+  --laco-fundo: #F7F5EF;
+  --laco-superficie: #FFFFFF;
+  --laco-areia: #EFEBE2;
+  --laco-borda: #E2DCCF;
+  --laco-apoio: #526A62;
+  --laco-tinta: #1F2A27;
+  --laco-receita: #1E7A5A;
+  --laco-despesa: #A8462F;
+  --laco-despesa-claro: #F6E3DD;
+  --laco-chart-1: #174B43;
+  --laco-chart-2: #E5A94D;
+  --laco-chart-3: #5B8E7D;
+  --laco-chart-4: #B5643F;
+  --laco-chart-5: #3E6F8E;
+  --laco-chart-6: #8A6FA3;
+  --laco-chart-7: #C98E2B;
+  --laco-chart-8: #7F958C;
+  --laco-chart-9: #9C4E63;
+  --laco-chart-10: #6B8F3E;
+  --laco-chart-11: #2F6F6A;
+  --laco-chart-12: #B08A5A;
+  --laco-font: 'Nunito Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --laco-radius-sm: 6px;
+  --laco-radius-md: 10px;
+  --laco-radius-lg: 14px;
+  --laco-radius-pill: 999px;
+}

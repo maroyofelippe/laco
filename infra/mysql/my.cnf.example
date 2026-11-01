@@ -1,0 +1,26 @@
+# Configuração recomendada para o MySQL LOCAL de desenvolvimento do Laço.
+# Copie as linhas da seção [mysqld] para o arquivo de configuração do seu servidor e reinicie o serviço:
+#   Windows : C:\ProgramData\MySQL\MySQL Server 8.4\my.ini      (Serviços → MySQL84 → Reiniciar)
+#   macOS   : /opt/homebrew/etc/my.cnf                          (brew services restart mysql@8.4)
+#   Linux   : /etc/mysql/mysql.conf.d/mysqld.cnf                (sudo systemctl restart mysql)
+
+[mysqld]
+# Só aceita conexões da própria máquina
+bind-address            = 127.0.0.1
+mysqlx-bind-address     = 127.0.0.1
+
+# Texto em UTF-8 completo (acentos e emojis)
+character-set-server    = utf8mb4
+collation-server        = utf8mb4_0900_ai_ci
+
+# Datas gravadas em UTC (a API também força UTC em cada conexão)
+default-time-zone       = '+00:00'
+
+# Segurança e integridade
+local_infile            = 0
+sql_mode                = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+
+# Recuperação até um ponto no tempo (backup diário + binlog)
+log_bin                 = mysql-bin
+binlog_expire_logs_seconds = 604800
+innodb_file_per_table   = 1

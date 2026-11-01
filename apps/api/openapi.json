@@ -1,0 +1,3926 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "HealthController_health_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Saúde"
+        ]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "operationId": "AuthController_register_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Cria conta e já devolve a sessão",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "AuthController_login_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Login com e-mail e senha",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Troca refresh token por novo par (rotação)",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "summary": "Encerra a sessão (revoga a cadeia do refresh token)",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "operationId": "UsersController_me_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Usuário"
+        ]
+      },
+      "patch": {
+        "operationId": "UsersController_update_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Usuário"
+        ]
+      }
+    },
+    "/api/v1/me/families": {
+      "get": {
+        "operationId": "UsersController_families_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Usuário"
+        ]
+      }
+    },
+    "/api/v1/me/devices": {
+      "post": {
+        "operationId": "UsersController_registerDevice_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDeviceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Usuário"
+        ]
+      }
+    },
+    "/api/v1/me/devices/{id}": {
+      "delete": {
+        "operationId": "UsersController_removeDevice_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Usuário"
+        ]
+      }
+    },
+    "/api/v1/families": {
+      "post": {
+        "operationId": "FamiliesController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFamilyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Cria família; o criador vira OWNER e recebe categorias padrão",
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}": {
+      "get": {
+        "operationId": "FamiliesController_get_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      },
+      "patch": {
+        "operationId": "FamiliesController_update_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFamilyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/members": {
+      "get": {
+        "operationId": "FamiliesController_members_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/members/{userId}": {
+      "patch": {
+        "operationId": "FamiliesController_updateMember_v1",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMemberDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      },
+      "delete": {
+        "operationId": "FamiliesController_removeMember_v1",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove membro (ADMIN) ou sai da família (o próprio usuário)",
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/members/{userId}/permissions": {
+      "get": {
+        "operationId": "FamiliesController_getPermissions_v1",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      },
+      "put": {
+        "operationId": "FamiliesController_setPermissions_v1",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPermissionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Substitui as permissões do membro em contas/cartões restritos",
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/invitations": {
+      "post": {
+        "operationId": "FamiliesController_invite_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvitationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      },
+      "get": {
+        "operationId": "FamiliesController_invitations_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/invitations/{id}": {
+      "delete": {
+        "operationId": "FamiliesController_revoke_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/invitations/accept": {
+      "post": {
+        "operationId": "FamiliesController_accept_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptInvitationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Aceita convite (o e-mail do usuário precisa ser o convidado)",
+        "tags": [
+          "Famílias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/categories": {
+      "get": {
+        "operationId": "CategoriesController_list_v1",
+        "parameters": [
+          {
+            "name": "kind",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "INCOME",
+                "EXPENSE",
+                "TRANSFER"
+              ]
+            }
+          },
+          {
+            "name": "includeInactive",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Categorias"
+        ]
+      },
+      "post": {
+        "operationId": "CategoriesController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Categorias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/categories/{id}": {
+      "patch": {
+        "operationId": "CategoriesController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Categorias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/categories/{id}/deactivate": {
+      "post": {
+        "operationId": "CategoriesController_deactivate_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Categorias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/categories/{id}/activate": {
+      "post": {
+        "operationId": "CategoriesController_activate_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Categorias"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/accounts": {
+      "get": {
+        "operationId": "AccountsController_list_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Contas"
+        ]
+      },
+      "post": {
+        "operationId": "AccountsController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Contas"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/accounts/{id}": {
+      "get": {
+        "operationId": "AccountsController_get_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Contas"
+        ]
+      },
+      "patch": {
+        "operationId": "AccountsController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Contas"
+        ]
+      },
+      "delete": {
+        "operationId": "AccountsController_remove_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Contas"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/accounts/{id}/balance": {
+      "get": {
+        "operationId": "AccountsController_balance_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Contas"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/cards": {
+      "get": {
+        "operationId": "CardsController_list_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Cartões visíveis com limite usado e fatura atual",
+        "tags": [
+          "Cartões"
+        ]
+      },
+      "post": {
+        "operationId": "CardsController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cartões"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/cards/{id}": {
+      "get": {
+        "operationId": "CardsController_get_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cartões"
+        ]
+      },
+      "patch": {
+        "operationId": "CardsController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cartões"
+        ]
+      },
+      "delete": {
+        "operationId": "CardsController_remove_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cartões"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/cards/{id}/statements": {
+      "get": {
+        "operationId": "CardsController_statements_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cartões"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/cards/{id}/statements/{sid}": {
+      "get": {
+        "operationId": "CardsController_statement_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Cartões"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/cards/{id}/statements/{sid}/payments": {
+      "post": {
+        "operationId": "CardsController_pay_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayStatementDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Registra pagamento da fatura a partir de uma conta",
+        "tags": [
+          "Cartões"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/transactions": {
+      "get": {
+        "operationId": "TransactionsController_list_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maximum": 200,
+              "default": 50,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "description": "Cursor opaco retornado em nextCursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "2026-10-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "INCOME",
+                "EXPENSE",
+                "TRANSFER_IN",
+                "TRANSFER_OUT",
+                "CARD_PAYMENT"
+              ]
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cardId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "source",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MANUAL",
+                "PDF_IMPORT",
+                "RECEIPT_OCR",
+                "RECURRENCE"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Busca na descrição",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Lista com filtros, busca e paginação por cursor; inclui totais do filtro",
+        "tags": [
+          "Lançamentos"
+        ]
+      },
+      "post": {
+        "operationId": "TransactionsController_create_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Cria receita ou despesa (categoria obrigatória)",
+        "tags": [
+          "Lançamentos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/transactions/installments": {
+      "post": {
+        "operationId": "TransactionsController_installments_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInstallmentsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Compra parcelada: gera N lançamentos, um por mês",
+        "tags": [
+          "Lançamentos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/transactions/transfers": {
+      "post": {
+        "operationId": "TransactionsController_transfer_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransferDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Transferência entre contas (dois lançamentos ligados)",
+        "tags": [
+          "Lançamentos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/transactions/{id}": {
+      "get": {
+        "operationId": "TransactionsController_get_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Lançamentos"
+        ]
+      },
+      "patch": {
+        "operationId": "TransactionsController_update_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "required": false,
+            "in": "query",
+            "description": "Para parcelas: só esta, esta e futuras, ou todas",
+            "schema": {
+              "default": "this",
+              "type": "string",
+              "enum": [
+                "this",
+                "future",
+                "all"
+              ]
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Versão atual do lançamento (concorrência otimista)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Lançamentos"
+        ]
+      },
+      "delete": {
+        "operationId": "TransactionsController_remove_v1",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "UUID para reenvio seguro (app offline)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "required": false,
+            "in": "query",
+            "description": "Para parcelas: só esta, esta e futuras, ou todas",
+            "schema": {
+              "default": "this",
+              "type": "string",
+              "enum": [
+                "this",
+                "future",
+                "all"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Lançamentos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/limits": {
+      "get": {
+        "operationId": "LimitsController_list_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Limites com consumo do período atual",
+        "tags": [
+          "Limites"
+        ]
+      },
+      "post": {
+        "operationId": "LimitsController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLimitDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Limites"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/limits/reevaluate": {
+      "post": {
+        "operationId": "LimitsController_reevaluate_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reavalia todos os limites ativos (rede de segurança; em produção roda diariamente)",
+        "tags": [
+          "Limites"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/limits/{id}": {
+      "get": {
+        "operationId": "LimitsController_get_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Limites"
+        ]
+      },
+      "patch": {
+        "operationId": "LimitsController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLimitDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Limites"
+        ]
+      },
+      "delete": {
+        "operationId": "LimitsController_remove_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Limites"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/limits/{id}/consumption": {
+      "get": {
+        "operationId": "LimitsController_consumption_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Consumo do período que contém a data, com os maiores lançamentos",
+        "tags": [
+          "Limites"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/alerts": {
+      "get": {
+        "operationId": "AlertsController_list_v1",
+        "parameters": [
+          {
+            "name": "since",
+            "required": false,
+            "in": "query",
+            "description": "Devolve só alertas com seq maior que este cursor (consulta incremental)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "RESOLVED",
+                "DISMISSED"
+              ]
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 100,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Alertas destinados ao usuário; use ?since=<cursor> para buscar só os novos",
+        "tags": [
+          "Alertas"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/alerts/{id}/read": {
+      "post": {
+        "operationId": "AlertsController_read_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Alertas"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/alerts/{id}/dismiss": {
+      "post": {
+        "operationId": "AlertsController_dismiss_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Dispensa o alerta para toda a família (ADMIN)",
+        "tags": [
+          "Alertas"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/budgets": {
+      "get": {
+        "operationId": "BudgetsController_get_v1",
+        "parameters": [
+          {
+            "name": "month",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "2026-10",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Orçamentos"
+        ]
+      },
+      "put": {
+        "operationId": "BudgetsController_set_v1",
+        "parameters": [
+          {
+            "name": "month",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "2026-10",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBudgetsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Orçamentos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/summary": {
+      "get": {
+        "operationId": "DashboardController_summary_v1",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: início do mês atual",
+            "schema": {
+              "example": "2026-10-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: fim do mês atual",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cardId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "months",
+            "required": false,
+            "in": "query",
+            "description": "Meses na série temporal",
+            "schema": {
+              "default": 12,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Receitas, despesas, resultado, saldo das contas e faturas em aberto",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/by-category": {
+      "get": {
+        "operationId": "DashboardController_byCategory_v1",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: início do mês atual",
+            "schema": {
+              "example": "2026-10-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: fim do mês atual",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cardId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "months",
+            "required": false,
+            "in": "query",
+            "description": "Meses na série temporal",
+            "schema": {
+              "default": 12,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Despesas por categoria (subcategorias somadas na categoria pai)",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/by-member": {
+      "get": {
+        "operationId": "DashboardController_byMember_v1",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: início do mês atual",
+            "schema": {
+              "example": "2026-10-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: fim do mês atual",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cardId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "months",
+            "required": false,
+            "in": "query",
+            "description": "Meses na série temporal",
+            "schema": {
+              "default": 12,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Despesas e receitas por membro",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/timeseries": {
+      "get": {
+        "operationId": "DashboardController_timeseries_v1",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: início do mês atual",
+            "schema": {
+              "example": "2026-10-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: fim do mês atual",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cardId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "months",
+            "required": false,
+            "in": "query",
+            "description": "Meses na série temporal",
+            "schema": {
+              "default": 12,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Evolução mensal de receitas e despesas (termina no mês de `to`)",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/limits-vs-actual": {
+      "get": {
+        "operationId": "DashboardController_limitsVsActual_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Limites ativos com consumo do período atual",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/budgets-vs-actual": {
+      "get": {
+        "operationId": "DashboardController_budgetsVsActual_v1",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: início do mês atual",
+            "schema": {
+              "example": "2026-10-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Padrão: fim do mês atual",
+            "schema": {
+              "example": "2026-10-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cardId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "months",
+            "required": false,
+            "in": "query",
+            "description": "Meses na série temporal",
+            "schema": {
+              "default": 12,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Orçado × realizado por categoria no mês de `to`",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/dashboard/upcoming": {
+      "get": {
+        "operationId": "DashboardController_upcoming_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Faturas a vencer nos próximos 45 dias",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/audit-logs": {
+      "get": {
+        "operationId": "AuditController_list_v1",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maximum": 200,
+              "default": 50,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "description": "Cursor opaco retornado em nextCursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "transaction",
+              "type": "string"
+            }
+          },
+          {
+            "name": "actorUserId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Auditoria"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/transactions/{id}/attachments": {
+      "post": {
+        "operationId": "FilesController_attach_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Anexa a foto de uma nota fiscal/comprovante ao lançamento (JPEG, PNG ou WebP, até 8 MB)",
+        "tags": [
+          "Arquivos"
+        ]
+      },
+      "get": {
+        "operationId": "FilesController_list_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Arquivos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/files/{fileId}/content": {
+      "get": {
+        "operationId": "FilesController_content_v1",
+        "parameters": [
+          {
+            "name": "fileId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Baixa um arquivo da família (sempre via API, com autorização)",
+        "tags": [
+          "Arquivos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/transactions/{id}/attachments/{fileId}": {
+      "delete": {
+        "operationId": "FilesController_remove_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Arquivos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/imports": {
+      "post": {
+        "operationId": "ImportsController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file",
+                  "sourceType"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "sourceType": {
+                    "type": "string",
+                    "enum": [
+                      "CARD_STATEMENT",
+                      "CHECKING",
+                      "SAVINGS"
+                    ]
+                  },
+                  "targetAccountId": {
+                    "type": "string"
+                  },
+                  "targetCardId": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Envia um extrato em PDF; devolve os itens extraídos para revisão (nada é lançado ainda)",
+        "tags": [
+          "Importação de extratos"
+        ]
+      },
+      "get": {
+        "operationId": "ImportsController_list_v1",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 30,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Importação de extratos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/imports/{id}": {
+      "get": {
+        "operationId": "ImportsController_get_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Importação de extratos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/imports/{id}/items/{itemId}": {
+      "patch": {
+        "operationId": "ImportsController_editItem_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditItemBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Importação de extratos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/imports/{id}/confirm": {
+      "post": {
+        "operationId": "ImportsController_confirm_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Confirma a importação: cria os lançamentos marcados, de forma atômica",
+        "tags": [
+          "Importação de extratos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/imports/{id}/cancel": {
+      "post": {
+        "operationId": "ImportsController_cancel_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Importação de extratos"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/recurrences": {
+      "get": {
+        "operationId": "RecurrencesController_list_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Recorrências"
+        ]
+      },
+      "post": {
+        "operationId": "RecurrencesController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRecurrenceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Cria lançamento recorrente; ocorrências até hoje são geradas na hora",
+        "tags": [
+          "Recorrências"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/recurrences/run": {
+      "post": {
+        "operationId": "RecurrencesController_run_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Gera agora as ocorrências pendentes da família (também roda a cada hora)",
+        "tags": [
+          "Recorrências"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/recurrences/{id}": {
+      "get": {
+        "operationId": "RecurrencesController_get_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Recorrências"
+        ]
+      },
+      "patch": {
+        "operationId": "RecurrencesController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRecurrenceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Altera as próximas ocorrências (as já lançadas não mudam)",
+        "tags": [
+          "Recorrências"
+        ]
+      },
+      "delete": {
+        "operationId": "RecurrencesController_remove_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Encerra a recorrência (lançamentos já gerados permanecem)",
+        "tags": [
+          "Recorrências"
+        ]
+      }
+    },
+    "/api/v1/families/{familyId}/sync/changes": {
+      "get": {
+        "operationId": "SyncController_changes_v1",
+        "parameters": [
+          {
+            "name": "since",
+            "required": false,
+            "in": "query",
+            "description": "Cursor da sincronização anterior (ISO 8601). Vazio = carga completa.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maximum": 1000,
+              "default": 500,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Mudanças desde o cursor: lançamentos (com exclusões), categorias, contas, cartões e membros",
+        "tags": [
+          "Sincronização"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Laço API",
+    "description": "Laço — finanças da família, em harmonia. API do app Android e do painel web. Todos os recursos de negócio ficam sob /families/{familyId}; a pessoa precisa ser membro ativo da família.",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Marco"
+          },
+          "email": {
+            "type": "string",
+            "example": "marco@exemplo.com"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8
+          },
+          "client": {
+            "type": "string",
+            "enum": [
+              "ANDROID",
+              "WEB"
+            ],
+            "default": "ANDROID"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "marco@exemplo.com"
+          },
+          "password": {
+            "type": "string"
+          },
+          "client": {
+            "type": "string",
+            "enum": [
+              "ANDROID",
+              "WEB"
+            ],
+            "default": "ANDROID"
+          },
+          "deviceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "RefreshDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      },
+      "UpdateMeDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterDeviceDto": {
+        "type": "object",
+        "properties": {
+          "fcmToken": {
+            "type": "string",
+            "description": "Token FCM do aparelho"
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "ANDROID",
+              "WEB"
+            ]
+          },
+          "appVersion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fcmToken"
+        ]
+      },
+      "CreateFamilyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Família Royo"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateFamilyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateMemberDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "OWNER",
+              "ADMIN",
+              "MEMBER",
+              "VIEWER"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED"
+            ]
+          },
+          "displayName": {
+            "type": "string"
+          }
+        }
+      },
+      "PermissionItemDto": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "type": "string",
+            "enum": [
+              "ACCOUNT",
+              "CARD"
+            ]
+          },
+          "resourceId": {
+            "type": "string"
+          },
+          "access": {
+            "type": "string",
+            "enum": [
+              "VIEW",
+              "EDIT"
+            ]
+          }
+        },
+        "required": [
+          "resourceType",
+          "resourceId",
+          "access"
+        ]
+      },
+      "SetPermissionsDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionItemDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "CreateInvitationDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "ana@exemplo.com"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MEMBER",
+              "VIEWER"
+            ]
+          }
+        },
+        "required": [
+          "email",
+          "role"
+        ]
+      },
+      "AcceptInvitationDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "CreateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Pets"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string",
+            "example": "#5B8E7D"
+          }
+        },
+        "required": [
+          "name",
+          "kind"
+        ]
+      },
+      "UpdateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateAccountDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CHECKING",
+              "SAVINGS",
+              "CASH"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "example": "Itaú conta conjunta"
+          },
+          "bankCode": {
+            "type": "string",
+            "example": "341"
+          },
+          "openingBalance": {
+            "type": "string",
+            "example": "1500.00"
+          },
+          "openingDate": {
+            "type": "string",
+            "example": "2026-10-01"
+          },
+          "ownerUserId": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "FAMILY",
+              "RESTRICTED"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "openingBalance",
+          "openingDate"
+        ]
+      },
+      "UpdateAccountDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "openingBalance": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "FAMILY",
+              "RESTRICTED"
+            ]
+          },
+          "ownerUserId": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateCardDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Nubank Marco"
+          },
+          "brand": {
+            "type": "string",
+            "example": "Mastercard"
+          },
+          "last4": {
+            "type": "string",
+            "example": "1234",
+            "description": "Somente os 4 últimos dígitos"
+          },
+          "creditLimit": {
+            "type": "string",
+            "example": "8000.00"
+          },
+          "closingDay": {
+            "type": "number",
+            "example": 3
+          },
+          "dueDay": {
+            "type": "number",
+            "example": 10
+          },
+          "paymentAccountId": {
+            "type": "string"
+          },
+          "holderUserId": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "FAMILY",
+              "RESTRICTED"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "creditLimit",
+          "closingDay",
+          "dueDay"
+        ]
+      },
+      "UpdateCardDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "creditLimit": {
+            "type": "string"
+          },
+          "closingDay": {
+            "type": "number"
+          },
+          "dueDay": {
+            "type": "number"
+          },
+          "paymentAccountId": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "FAMILY",
+              "RESTRICTED"
+            ]
+          }
+        }
+      },
+      "PayStatementDto": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string",
+            "example": "1520.33"
+          },
+          "paidOn": {
+            "type": "string",
+            "example": "2026-11-10"
+          }
+        },
+        "required": [
+          "accountId",
+          "amount"
+        ]
+      },
+      "CreateTransactionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID gerado no app (modo offline)"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "amount": {
+            "type": "string",
+            "example": "312.45"
+          },
+          "description": {
+            "type": "string",
+            "example": "Supermercado Dia"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "memberUserId": {
+            "type": "string"
+          },
+          "occurredOn": {
+            "type": "string",
+            "example": "2026-10-24"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CLEARED"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "MANUAL",
+              "RECEIPT_OCR"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "amount",
+          "description",
+          "categoryId",
+          "occurredOn"
+        ]
+      },
+      "CreateInstallmentsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID do plano (opcional)"
+          },
+          "description": {
+            "type": "string",
+            "example": "Notebook"
+          },
+          "totalAmount": {
+            "type": "string",
+            "example": "4800.00"
+          },
+          "installments": {
+            "type": "number",
+            "example": 10
+          },
+          "firstDate": {
+            "type": "string",
+            "example": "2026-10-26"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "memberUserId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "totalAmount",
+          "installments",
+          "firstDate",
+          "categoryId"
+        ]
+      },
+      "CreateTransferDto": {
+        "type": "object",
+        "properties": {
+          "fromAccountId": {
+            "type": "string"
+          },
+          "toAccountId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string",
+            "example": "500.00"
+          },
+          "occurredOn": {
+            "type": "string",
+            "example": "2026-10-26"
+          },
+          "description": {
+            "type": "string",
+            "example": "Reserva de emergência"
+          }
+        },
+        "required": [
+          "fromAccountId",
+          "toAccountId",
+          "amount",
+          "occurredOn"
+        ]
+      },
+      "UpdateTransactionDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "memberUserId": {
+            "type": "string"
+          },
+          "occurredOn": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CLEARED"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateLimitDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Lazer - mensal"
+          },
+          "scopeType": {
+            "type": "string",
+            "enum": [
+              "FAMILY",
+              "CATEGORY",
+              "ACCOUNT",
+              "CARD",
+              "MEMBER"
+            ]
+          },
+          "scopeId": {
+            "type": "string"
+          },
+          "includeSubcategories": {
+            "type": "boolean",
+            "default": true
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "WEEKLY",
+              "MONTHLY",
+              "CARD_CYCLE",
+              "CUSTOM"
+            ]
+          },
+          "customStart": {
+            "type": "string"
+          },
+          "customEnd": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string",
+            "example": "800.00"
+          },
+          "thresholds": {
+            "example": [
+              80,
+              100
+            ],
+            "default": [
+              80,
+              100
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notifyRoles": {
+            "example": [
+              "OWNER",
+              "ADMIN",
+              "MEMBER"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "scopeType",
+          "period",
+          "amount"
+        ]
+      },
+      "UpdateLimitDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "thresholds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notifyRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BudgetItemDto": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "string"
+          },
+          "plannedAmount": {
+            "type": "string",
+            "example": "1200.00",
+            "description": "\"0\" remove o orçamento da categoria"
+          }
+        },
+        "required": [
+          "categoryId",
+          "plannedAmount"
+        ]
+      },
+      "SetBudgetsDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BudgetItemDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "EditItemBody": {
+        "type": "object",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "ACCEPT",
+              "SKIP"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "occurredOn": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "categoryId": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemEditDto": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "ACCEPT",
+              "SKIP"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "occurredOn": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "categoryId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId"
+        ]
+      },
+      "ConfirmDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "Correções finais (opcional; também dá para editar item a item)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemEditDto"
+            }
+          }
+        }
+      },
+      "CreateRecurrenceDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "amount": {
+            "type": "string",
+            "example": "129.90"
+          },
+          "description": {
+            "type": "string",
+            "example": "Internet"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "memberUserId": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "string",
+            "enum": [
+              "DAILY",
+              "WEEKLY",
+              "MONTHLY",
+              "YEARLY"
+            ]
+          },
+          "intervalN": {
+            "type": "number",
+            "default": 1
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2026-11-10"
+          },
+          "endDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "amount",
+          "description",
+          "categoryId",
+          "frequency",
+          "startDate"
+        ]
+      },
+      "UpdateRecurrenceDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
